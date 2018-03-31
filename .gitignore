@@ -5,7 +5,3 @@ venv/*
 # Builds
 __pycache__/
 *.py[cod]
-
-# Sphinx documentation
-docs/_build/
-
