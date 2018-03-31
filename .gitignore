@@ -1,0 +1,11 @@
+# Virtual environment
+venv/*
+.idea/*
+
+# Builds
+__pycache__/
+*.py[cod]
+
+# Sphinx documentation
+docs/_build/
+
