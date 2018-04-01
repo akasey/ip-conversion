@@ -16,3 +16,7 @@ To convert decimal number to IPv4.
 ip = IPv4_utils.decimal_to_ipv4(3232235777) # 192.168.1.1
 ```
 
+### Execute tests
+```python
+python3 unit_tests.py
+```

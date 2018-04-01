@@ -38,7 +38,7 @@ class IPv4_utils:
 
         dec = 0
         for idx, x in enumerate(reversed(int_splits)):
-            dec += x * 256**idx
+            dec =  dec | x << 8*idx
         return dec
 
     @staticmethod
@@ -65,8 +65,8 @@ class IPv4_utils:
 
         octets = []
         while decimal > 0 or len(octets) != 4:
-            octet = decimal % 256
+            octet = decimal & 0xff
             octets.append(str(octet))
-            decimal = decimal // 256
+            decimal = decimal >> 8
 
         return ".".join(reversed(octets))
