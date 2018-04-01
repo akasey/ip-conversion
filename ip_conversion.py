@@ -1,3 +1,4 @@
+import re
 
 class IPv4_utils:
     @staticmethod
@@ -18,26 +19,16 @@ class IPv4_utils:
 
         """
         if not type(ip) is str:
-            raise ValueError("Provided parameter isn't string.")
+            raise ValueError("Provided parameter is not string.")
 
-        splits = ip.split(".")
-        if len(splits) != 4:
-            raise ValueError("Provided parameter isn't IPv4 address.")
-        try:
-            def validate(octet):
-                if len(octet) >3:
-                    raise ValueError("%s isn't valid octet" % octet)
-                int_octet = int(octet)
-                if int_octet >= 0 and int_octet < 256:
-                    return int_octet
-                raise ValueError("%d isn't valid octet" % int_octet )
+        ipv4_pattern = re.compile('^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$')
+        if not ipv4_pattern.match(ip):
+            raise ValueError("Provided parameter is not IPv4 address.")
 
-            int_splits = [validate(x) for x in splits]
-        except ValueError as e:
-            raise ValueError("Provided parameter isn't IPv4 address: %s :: %s" % (ip, str(e)) )
+        int_octets = [int(x) for x in ip.split(".")]
 
         dec = 0
-        for idx, x in enumerate(reversed(int_splits)):
+        for idx, x in enumerate(reversed(int_octets)):
             dec =  dec | x << 8*idx
         return dec
 
